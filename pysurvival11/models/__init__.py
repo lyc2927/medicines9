@@ -1,4 +1,4 @@
-"""from __future__ import absolute_import
+""""from __future__ import absolute_import
 import copy
 import tempfile
 import pyarrow as pa
@@ -344,4 +344,4 @@ class BaseModel(object):
         # Calculating cumulative_hazard/risk
         cumulative_hazard = self.predict_cumulative_hazard(x, None, **kwargs)
         risk_score = np.sum(cumulative_hazard, 1)
-        return risk_score"""
+        return risk_score""""
