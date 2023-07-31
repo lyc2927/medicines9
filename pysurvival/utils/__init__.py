@@ -1,7 +1,7 @@
 import copy
 import numpy as np
 import pandas as pd
-from pysurvival.utils._functions import _logrankScores
+#from pysurvival.utils._functions import _logrankScores
 # %matplotlib inline for Jupyter notebooks 
 
 
@@ -99,7 +99,7 @@ def rank_scores(T, E):
             ranks for each survival time T
     """
     T, E = check_data(T, E)
-    return _logrankScores(T,E)
+    #return _logrankScores(T,E)
 
 
 def save_model(model, path_file):
