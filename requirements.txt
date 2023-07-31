@@ -1,3 +1,2 @@
-pip==23.2.1
-pysurvival==0.1.2
+pysurvival==0.2.1
 lifelines==0.27.7
