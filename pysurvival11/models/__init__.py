@@ -1,4 +1,4 @@
-""""from __future__ import absolute_import
+"""from __future__ import absolute_import
 import copy
 import tempfile
 import pyarrow as pa
@@ -13,9 +13,7 @@ from pysurvival.utils._functions import _get_time_buckets
 
 
 class BaseModel(object):
-    """ Base class for all estimators in pysurvival. It should not be used on
-        its own.
-    """
+
 
     def __init__(self, auto_scaler=True):
 
@@ -33,22 +31,13 @@ class BaseModel(object):
         self.__repr__()
 
     def __repr__(self):
-        """ Creates the representation of the Object """
+
 
         self.name = self.__class__.__name__
         return self.name
 
     def save(self, path_file):
-        """ Save the model components: 
-                * the paremeters of the model (parameters) 
-                * the PyTorch model itself (model) if it exists
-            And Compress them into a zip file
 
-            Parameters
-            ----------
-            * path_file, str
-                address of the file where the model will be saved
-        """
 
         # Ensuring the file has the proper name
         folder_name = os.path.dirname(path_file) + '/'
@@ -103,15 +92,6 @@ class BaseModel(object):
             self.__dict__['scaler'] = copy.deepcopy(temp_scaler)
 
     def load(self, path_file):
-        """ Load the model components from a .zip file: 
-                * the parameters of the model (.params) 
-                * the PyTorch model itself (.model) is exists
-
-            Parameters
-            ----------
-            * path_file, str
-                address of the file where the model will be loaded from 
-        """
 
         # Ensuring the file has the proper name
         folder_name = os.path.dirname(path_file) + '/'
@@ -158,9 +138,6 @@ class BaseModel(object):
             os.remove(temp_file)
 
     def get_time_buckets(self, extra_timepoint=False):
-        """ Creating the time buckets based on the times axis such that
-            for the k-th time bin is [ t(k-1), t(k) ] in the time axis.
-        """
 
         # Checking if the time axis has already been created
         if self.times is None or len(self.times) <= 1:
@@ -180,24 +157,7 @@ class BaseModel(object):
         raise NotImplementedError()
 
     def predict_hazard(self, x, t=None, **kwargs):
-        """ Predicts the hazard function h(t, x)
 
-            Parameters
-            ----------
-            * `x` : **array-like** *shape=(n_samples, n_features)* --
-                array-like representing the datapoints. 
-                x should not be standardized before, the model
-                will take care of it
-
-            * `t`: **double** *(default=None)* --
-                 time at which the prediction should be performed. 
-                 If None, then return the function for all available t.
-
-            Returns
-            -------
-            * `hazard`: **numpy.ndarray** --
-                array-like representing the prediction of the hazard function
-        """
 
         # Checking if the data has the right format
         x = utils.check_data(x)
@@ -208,24 +168,7 @@ class BaseModel(object):
         return hazard
 
     def predict_density(self, x, t=None, **kwargs):
-        """ Predicts the density function d(t, x)
 
-            Parameters
-            ----------
-            * `x` : **array-like** *shape=(n_samples, n_features)* --
-                array-like representing the datapoints. 
-                x should not be standardized before, the model
-                will take care of it
-
-            * `t`: **double** *(default=None)* --
-                 time at which the prediction should be performed. 
-                 If None, then return the function for all available t.
-
-            Returns
-            -------
-            * `density`: **numpy.ndarray** --
-                array-like representing the prediction of density function
-        """
 
         # Checking if the data has the right format
         x = utils.check_data(x)
@@ -235,24 +178,7 @@ class BaseModel(object):
         return density
 
     def predict_survival(self, x, t=None, **kwargs):
-        """ Predicts the survival function S(t, x)
 
-            Parameters
-            ----------
-            * `x` : **array-like** *shape=(n_samples, n_features)* --
-                array-like representing the datapoints. 
-                x should not be standardized before, the model
-                will take care of it
-
-            * `t`: **double** *(default=None)* --
-                time at which the prediction should be performed. 
-                If None, then return the function for all available t.
-
-            Returns
-            -------
-            * `survival`: **numpy.ndarray** --
-                array-like representing the prediction of the survival function
-        """
 
         # Checking if the data has the right format
         x = utils.check_data(x)
@@ -262,25 +188,7 @@ class BaseModel(object):
         return survival
 
     def predict_cdf(self, x, t=None, **kwargs):
-        """ Predicts the cumulative density function F(t, x)
 
-            Parameters
-            ----------
-            * `x` : **array-like** *shape=(n_samples, n_features)* --
-                array-like representing the datapoints. 
-                x should not be standardized before, the model
-                will take care of it
-
-            * `t`: **double** *(default=None)* --
-                time at which the prediction should be performed. 
-                If None, then return the function for all available t.
-
-            Returns
-            -------
-            * `cdf`: **numpy.ndarray** --
-                array-like representing the prediction of the cumulative 
-                density function 
-        """
 
         # Checking if the data has the right format
         x = utils.check_data(x)
@@ -291,25 +199,7 @@ class BaseModel(object):
         return cdf
 
     def predict_cumulative_hazard(self, x, t=None, **kwargs):
-        """ Predicts the cumulative hazard function H(t, x)
 
-            Parameters
-            ----------
-            * `x` : **array-like** *shape=(n_samples, n_features)* --
-                array-like representing the datapoints. 
-                x should not be standardized before, the model
-                will take care of it
-
-            * `t`: **double** *(default=None)* --
-                time at which the prediction should be performed. 
-                If None, then return the function for all available t.
-
-            Returns
-            -------
-            * `cumulative_hazard`: **numpy.ndarray** --
-                array-like representing the prediction of the cumulative_hazard
-                function
-        """
 
         # Checking if the data has the right format
         x = utils.check_data(x)
@@ -320,23 +210,6 @@ class BaseModel(object):
         return cumulative_hazard
 
     def predict_risk(self, x, **kwargs):
-        """ Predicts the Risk Score/Mortality function for all t,
-            R(x) = sum( cumsum(hazard(t, x)) )
-            According to Random survival forests from Ishwaran H et al
-            https://arxiv.org/pdf/0811.1645.pdf
-
-            Parameters
-            ----------
-            * `x` : **array-like** *shape=(n_samples, n_features)* --
-                array-like representing the datapoints. 
-                x should not be standardized before, the model
-                will take care of it
-
-            Returns
-            -------
-            * `risk_score`: **numpy.ndarray** --
-                array-like representing the prediction of Risk Score function
-        """
 
         # Checking if the data has the right format
         x = utils.check_data(x)
@@ -344,4 +217,4 @@ class BaseModel(object):
         # Calculating cumulative_hazard/risk
         cumulative_hazard = self.predict_cumulative_hazard(x, None, **kwargs)
         risk_score = np.sum(cumulative_hazard, 1)
-        return risk_score""""
+        return risk_score"""
