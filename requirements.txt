@@ -1,1 +1,1 @@
-pysurvival==1.2
+pysurvival
