@@ -169,7 +169,7 @@ class BaseModel(object):
             raise AttributeError(error)
 
         # Creating the base time buckets
-        time_buckets = _get_time_buckets(self.times)
+        time_buckets = get_time_buckets(self.times)
 
         # Adding an additional element if specified
         if extra_timepoint:
