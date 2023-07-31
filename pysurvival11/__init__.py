@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+"""from __future__ import absolute_import
 import sys
 import torch
 
@@ -28,5 +28,5 @@ PYTHON_VERSION = sys.version_info[0]
 HAS_GPU = torch.cuda.is_available()
 
 
-__all__ = [  'PYTHON_VERSION', 'HAS_GPU', ]
+__all__ = [  'PYTHON_VERSION', 'HAS_GPU', ]"""
 
