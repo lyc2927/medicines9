@@ -1,7 +1,7 @@
 import copy
 import numpy as np
 import pandas as pd
-from pysurvival.utils._functions import _logrankScores
+from pysurvival11.utils._functions import _logrankScores
 # %matplotlib inline for Jupyter notebooks 
 
 
