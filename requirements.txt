@@ -1,6 +1,2 @@
-scikit-learn
-numpy
-matplotlib
-pandas
-xgboost
-imbalanced-learn
+pysurvival==0.1.2
+lifelines==0.27.7
