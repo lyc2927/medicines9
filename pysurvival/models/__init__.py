@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from pysurvival import utils
-from pysurvival.utils._functions import _get_time_buckets
+#from pysurvival.utils._functions import _get_time_buckets
 
 
 class BaseModel(object):
@@ -169,8 +169,9 @@ class BaseModel(object):
             raise AttributeError(error)
 
         # Creating the base time buckets
-        time_buckets = _get_time_buckets(self.times)
-
+        #time_buckets = _get_time_buckets(self.times)  ###
+        time_buckets = 0
+        
         # Adding an additional element if specified
         if extra_timepoint:
             time_buckets += [(time_buckets[-1][1], time_buckets[-1][1] * 1.01)]
