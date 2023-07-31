@@ -109,7 +109,8 @@ class BaseMultiTaskModel(BaseModel):
             # Building time points and time buckets
         self.times = np.linspace(min_time, max_time * (1. + p), self.bins)
         self.get_time_buckets()
-        self.num_times = len(self.time_buckets)
+        #self.num_times = len(self.time_buckets)
+        self.num_times = 1
 
     def compute_XY(self, X, T, E, is_min_time_zero, extra_pct_time):
         """ Given the survival_times, events and time_points vectors, 
