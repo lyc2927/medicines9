@@ -45,11 +45,11 @@ def modelA(person1):
     random.seed(3)  # 改种子进行调整
     import numpy as np
     import pandas as pd
-    from pysurvival.models.simulations import SimulationModel
-    from pysurvival.models.multi_task import NeuralMultiTaskModel
-    from pysurvival.utils.metrics import concordance_index
-    from pysurvival.utils.display import integrated_brier_score
-    from pysurvival.datasets import Dataset
+    from pysurvival11.models.simulations import SimulationModel
+    from pysurvival11.models.multi_task import NeuralMultiTaskModel
+    from pysurvival11.utils.metrics import concordance_index
+    from pysurvival11.utils.display import integrated_brier_score
+    from pysurvival11.datasets import Dataset
     import lifelines
 
     person1 = person1
