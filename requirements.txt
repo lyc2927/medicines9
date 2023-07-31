@@ -1,1 +1,1 @@
-pysurvival
+pysurvival==0.2.1
