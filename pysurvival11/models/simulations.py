@@ -4,8 +4,8 @@ import pandas as pd
 import random
 import scipy
 import copy
-from pysurvival import utils
-from pysurvival.models import BaseModel
+from pysurvival11 import utils
+from pysurvival11.models import BaseModel
 
 # %matplotlib inline
 
