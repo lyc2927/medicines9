@@ -1,2 +1,3 @@
 lifelines==0.27.7
 torch
+scikit-learn
